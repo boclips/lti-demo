@@ -1,0 +1,3 @@
+boclips:
+  lti:
+    initiateLoginUrl: 'https://lti.boclips.com/v1p3/initiate-login'

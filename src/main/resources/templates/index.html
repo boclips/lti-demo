@@ -1,12 +1,28 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>LTI Demo</title>
 </head>
 
 <body>
-    <a href="https://google.com">Google</a>
+    <form method="post" th:action="${initiateLoginUrl}" target="lti-resource">
+        <label>
+            iss
+            <input type="text" name="iss">
+        </label>
+        <label>
+            login_hint
+            <input type="text" name="login_hint">
+        </label>
+        <label>
+            target_link_uri
+            <input type="text" name="target_link_uri">
+        </label>
+        <input type="submit" value="post">
+    </form>
+
+    <iframe name="lti-resource"></iframe>
 </body>
 
 </html>
