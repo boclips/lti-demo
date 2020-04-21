@@ -34,6 +34,6 @@ class AuthenticationController {
         @RequestParam lti_message_hint: String?
     ) = ModelAndView(
         "auth-success",
-        mapOf("state" to state, "idToken" to "garbage")
+        mapOf("state" to state, "idToken" to "garbage", "redirectUri" to redirect_uri)
     )
 }

@@ -17,6 +17,7 @@ class AuthenticationControllerIntegrationTest : AbstractSpringIntegrationTest() 
     fun `returns a page with state and id_token rendered into a form`() {
         val state = "my state"
 
+        val redirectUri = "https://tool.com/auth-response"
         mvc.perform(
             get("/auth")
                 .queryParam("scope", "openid")
@@ -27,13 +28,14 @@ class AuthenticationControllerIntegrationTest : AbstractSpringIntegrationTest() 
                 .queryParam("response_mode", "form_post")
                 .queryParam("nonce", "some-uuid")
                 .queryParam("prompt", "none")
-                .queryParam("redirect_uri", "https://tool.com/auth-response")
+                .queryParam("redirect_uri", redirectUri)
         )
             .andExpect(status().isOk)
             .andExpect(view().name("auth-success"))
             .andExpect(model().attribute("idToken", not(nullValue())))
             .andExpect(model().attribute("idToken", not(emptyString())))
             .andExpect(content().string(containsString(state)))
+            .andExpect(content().string(containsString(redirectUri)))
     }
 
     @Test

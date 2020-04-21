@@ -6,9 +6,9 @@
 </head>
 
 <body>
-    <form>
-        <input type="text" th:value="${state}"/>
-        <input type="text" th:value="${idToken}"/>
+    <form method="post" th:action="${redirectUri}">
+        <input type="text" name="state" th:value="${state}"/>
+        <input type="text" name="id_token" th:value="${idToken}"/>
         <input type="submit">
     </form>
 </body>
