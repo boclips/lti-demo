@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.view
 @TestPropertySource(
     properties = ["boclips.lti.initiateLoginUrl=http://localhost:8080/v1p3/initiate-login"]
 )
-class IndexControllerIntegrationTest : AbstractSpringIntegrationTest() {
+class IndexPageControllerIntegrationTest : AbstractSpringIntegrationTest() {
     @Test
     fun `renders a landing with expected model parameters`() {
         mvc.perform(get("/"))
