@@ -1,3 +1,6 @@
 boclips:
   lti:
     initiateLoginUrl: 'https://lti.testing-boclips.com/v1p3/initiate-login'
+    issuerUrl: "https://lti-demo.testing-boclips.com"
+    privateSigningKey:
+    publicSigningKey:
