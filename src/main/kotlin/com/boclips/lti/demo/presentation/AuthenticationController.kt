@@ -1,21 +1,15 @@
 package com.boclips.lti.demo.presentation
 
-import com.boclips.lti.demo.application.AssembleIdToken
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.ModelAndView
-import java.net.URL
 import javax.validation.constraints.NotNull
 
 @RestController
 @RequestMapping("/auth")
-class AuthenticationController(
-    val assembleIdToken: AssembleIdToken,
-    @Value("\${boclips.lti.issuerUrl}") private val issuerUrl: String
-) {
+class AuthenticationController {
 
     @GetMapping
     fun authenticate(
@@ -37,17 +31,9 @@ class AuthenticationController(
         @RequestParam nonce: String,
         @NotNull
         @RequestParam prompt: String,
-        @NotNull
-        @RequestParam lti_message_hint: String
-    ): ModelAndView {
-        val token = assembleIdToken(
-            clientId = client_id,
-            issuer = URL(issuerUrl),
-            targetLinkUri = URL(lti_message_hint)
-        )
-        return ModelAndView(
-            "auth-success",
-            mapOf("state" to state, "idToken" to token, "redirectUri" to redirect_uri)
-        )
-    }
+        @RequestParam lti_message_hint: String?
+    ) = ModelAndView(
+        "auth-success",
+        mapOf("state" to state, "idToken" to "garbage", "redirectUri" to redirect_uri)
+    )
 }
