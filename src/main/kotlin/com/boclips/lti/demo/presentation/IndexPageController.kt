@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.servlet.ModelAndView
 
 @Controller
-class IndexPageController(@Value("\${boclips.lti.initiateLoginUrl}") private val initiateLoginUrl: String) {
+class IndexPageController(
+    @Value("\${boclips.lti.initiateLoginUrl}") private val initiateLoginUrl: String
+) {
     @GetMapping("/")
     fun landingPage() = ModelAndView(
         "index", mapOf(

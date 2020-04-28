@@ -26,10 +26,12 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
+
+	implementation("com.auth0:java-jwt:3.10.2")
+	implementation("org.bitbucket.b_c:jose4j:0.7.0")
 }
 
 tasks.withType<Test> {
