@@ -1,3 +1,5 @@
 boclips:
   lti:
     initiateLoginUrl: 'https://lti.boclips.com/v1p3/initiate-login'
+  authentication:
+    endPoint: "https://login.boclips.com/auth"

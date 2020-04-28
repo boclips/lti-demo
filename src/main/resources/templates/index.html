@@ -3,9 +3,22 @@
 
 <head>
     <title>LTI Demo</title>
+    <script type="application/javascript"
+            src="https://unpkg.com/boclips-js-security/dist/min/boclips-js-security"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
 <body>
+<header class="boclips-header">
+    <main class="boclips-header__content">
+        <section>
+            <div class="boclips-header__logo">
+            </div>
+        </section>
+        <div id="logout-container"></div>
+    </main>
+</header>
+<div>
     <form method="post" th:action="${initiateLoginUrl}" target="lti-resource">
         <label>
             iss
@@ -23,6 +36,28 @@
     </form>
 
     <iframe name="lti-resource"></iframe>
+</div>
+
+<script th:inline="javascript" type="application/javascript">
+    const authOptions = {
+        realm: 'boclips',
+        clientId: 'backoffice-ui',
+        mode: 'login-required',
+        authEndpoint: /*[[${authEndpoint}]]*/ "",
+        onLogin: () => {
+            console.log("%cLTI DEMO", "color: white; background-color: #0e69ff; font-size: 25px; border-radius: 8px; padding-right: 10px; padding-left: 10px;");
+
+            const container = document.getElementById("logout-container");
+            const button = document.createElement("button");
+            button.innerText = "Logout"
+            button.className="button button--primary"
+            button.onclick = (() => Boclips.default.getInstance().logout());
+            container.appendChild(button);
+        },
+    };
+
+    Boclips.default.createInstance(authOptions);
+</script>
 </body>
 
 </html>

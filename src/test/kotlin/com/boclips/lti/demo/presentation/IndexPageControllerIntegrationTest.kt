@@ -16,6 +16,8 @@ class IndexPageControllerIntegrationTest : AbstractSpringIntegrationTest() {
             .andExpect(status().isOk)
             .andExpect(view().name("index"))
             .andExpect(model().attribute("initiateLoginUrl", "http://localhost:8080/v1p3/initiate-login"))
+            .andExpect(model().attribute("authEndpoint", "https://login.staging-boclips.com/auth"))
             .andExpect(content().string(containsString("http://localhost:8080/v1p3/initiate-login")))
+            .andExpect(content().string(containsString("https:\\/\\/login.staging-boclips.com\\/auth")))
     }
 }

@@ -9,7 +9,10 @@ import org.springframework.test.web.servlet.MockMvc
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @TestPropertySource(
-    properties = ["boclips.lti.initiateLoginUrl=http://localhost:8080/v1p3/initiate-login"]
+    properties = [
+        "boclips.lti.initiateLoginUrl=http://localhost:8080/v1p3/initiate-login",
+        "boclips.authentication.endPoint=https://login.staging-boclips.com/auth"
+    ]
 )
 abstract class AbstractSpringIntegrationTest {
     @Autowired

@@ -1,0 +1,66 @@
+* {
+    font-size: 16px;
+    font-family: 'Heebo', sans-serif;
+}
+
+.boclips-header {
+    z-index: 1000;
+    width: 100vw;
+    min-height: 84px;
+    display: flex;
+    align-items: center;
+    margin: -8px 0px 16px -8px;
+
+    background-color: #fff;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .2), 0 3px 6px 0 rgba(0, 0, 0, .16);
+}
+
+.boclips-header__content {
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.boclips-header__logo {
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 42px;
+    width: 110px;
+    background-image: url(../img/boclips-logo.png);
+}
+
+.button {
+    transition: all 0.4s ease;
+    line-height: 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 0px;
+    padding: 8px;
+    height: 40px !important;
+    text-decoration: none;
+    width: 130px;
+}
+
+
+.button--primary {
+    background: #0E69FF none;
+    color: white;
+}
+
+.button--primary:hover {
+    cursor: pointer;
+    background: #0051BC none;
+}
+
+.button--primary:active {
+    background: #00217D none !important;
+    box-shadow: none;
+}
+
+.button--primary:focus {
+    background: #0E69FF none;
+    box-shadow: 0 0 4px 1px #0E69FF;
+}
+
