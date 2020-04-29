@@ -1,5 +1,8 @@
 boclips:
   lti:
     initiateLoginUrl: 'https://lti.staging-boclips.com/v1p3/initiate-login'
+    issuerUrl: "https://lti-demo.staging-boclips.com"
+    privateSigningKey:
+    publicSigningKey:
   authentication:
     endPoint: "https://login.staging-boclips.com/auth"
