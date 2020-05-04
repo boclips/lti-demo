@@ -32,6 +32,7 @@ dependencies {
 
 	implementation("com.auth0:java-jwt:3.10.2")
 	implementation("org.bitbucket.b_c:jose4j:0.7.0")
+	implementation("io.sentry:sentry-logback:1.7.21")
 }
 
 tasks.withType<Test> {
