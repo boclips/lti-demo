@@ -17,6 +17,8 @@ class IndexPageControllerIntegrationTest : AbstractSpringIntegrationTest() {
             .andExpect(view().name("index"))
             .andExpect(model().attribute("initiateLoginUrl", "https://lti.staging-boclips.com/v1p3/initiate-login"))
             .andExpect(model().attribute("authEndpoint", "https://login.staging-boclips.com/auth"))
+            .andExpect(model().attribute("issuerUrl", "https://test-issuser.com"))
+            .andExpect(model().attribute("targetLinkUri", "https://test-target-link-uri"))
             .andExpect(content().string(containsString("https://lti.staging-boclips.com/v1p3/initiate-login")))
             .andExpect(content().string(containsString("https:\\/\\/login.staging-boclips.com\\/auth")))
     }

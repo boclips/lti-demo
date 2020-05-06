@@ -2,6 +2,7 @@ boclips:
   lti:
     initiateLoginUrl: "http://localhost:8081/v1p3/initiate-login"
     issuerUrl: "https://localhost:8080"
+    targetLinkUri: "http://localhost:8081/collections"
     privateSigningKey: >-
       -----BEGIN PRIVATE KEY-----
       MIIJQQIBADANBgkqhkiG9w0BAQEFAASCCSswggknAgEAAoICAQDqYXEtuKhksIM0
@@ -70,3 +71,5 @@ boclips:
       8/e+2unCpR/Bk+BlQRq3u89psJy0e1/4N+bcNiLtlr0D3vXI1D+P5YFzmPhWZ3fh
       RuDQH9KPBuDQKIWcCxdEsy8CAwEAAQ==
       -----END PUBLIC KEY-----
+  authentication:
+    endPoint: "https://login.staging-boclips.com/auth"

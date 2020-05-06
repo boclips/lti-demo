@@ -4,6 +4,7 @@ boclips:
   lti:
     initiateLoginUrl: "https://lti.staging-boclips.com/v1p3/initiate-login"
     issuerUrl: "https://test-issuser.com"
+    targetLinkUri: "https://test-target-link-uri"
     privateSigningKey: >-
       -----BEGIN PRIVATE KEY-----
       MIIJQQIBADANBgkqhkiG9w0BAQEFAASCCSswggknAgEAAoICAQDqYXEtuKhksIM0

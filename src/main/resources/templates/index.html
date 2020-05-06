@@ -4,42 +4,59 @@
 <head>
     <title>LTI Demo</title>
     <script type="application/javascript"
-            src="https://unpkg.com/boclips-js-security/dist/min/boclips-js-security"></script>
+            src="https://unpkg.com/boclips-js-security/dist/min/boclips-js-security">
+    </script>
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
 <body>
-<header class="boclips-header">
-    <main class="boclips-header__content">
-        <section>
-            <div class="boclips-header__logo">
-            </div>
-        </section>
-        <div id="logout-container"></div>
-    </main>
-</header>
-<div>
-    <form method="post" th:action="${initiateLoginUrl}" target="lti-resource">
+<div id="container" class="flex-container">
+    <header class="boclips-header">
+        <main class="boclips-header__content">
+            <section>
+                <div class="boclips-header__logo">
+                </div>
+            </section>
+            <div id="logout-container"></div>
+        </main>
+    </header>
+    <div id="resource-selection">
+        <div id="resource-selection-options">
+            <input class="search-bar" value="/collections" disabled></input>
+            <button id="select-resource-button" class="button--primary" onclick=submitForm()>
+                <span>Get Resource</span>
+            </button>
+        </div>
+    </div>
+    <form id="outer-form"
+          method="post"
+          th:action="${initiateLoginUrl}"
+          target="lti-resource"
+          class="collapsed"
+    >
         <label>
             iss
-            <input type="text" name="iss">
+            <input type="text" name="iss" th:value="${issuerUrl}">
         </label>
         <label>
             login_hint
-            <input type="text" name="login_hint">
+            <input type="text" name="login_hint" value="dummy_login_hint">
         </label>
         <label>
             target_link_uri
-            <input type="text" name="target_link_uri">
+            <input type="text" name="target_link_uri" th:value="${targetLinkUri}">
         </label>
         <label>
             lti_message_hint
-            <input type="text" name="lti_message_hint">
+            <input type="text" name="lti_message_hint" th:value="${targetLinkUri}">
         </label>
-        <input type="submit" value="post">
     </form>
 
-    <iframe name="lti-resource"></iframe>
+    <iframe id="lti-resource"
+            name="lti-resource"
+            class="invisible grow"
+    >
+    </iframe>
 </div>
 
 <script th:inline="javascript" type="application/javascript">
@@ -61,6 +78,22 @@
     };
 
     Boclips.default.createInstance(authOptions);
+</script>
+<script>
+    const outerForm = document.getElementById("outer-form");
+    const selectResourceButton = document.getElementById("select-resource-button");
+    const ltiResourceFrame = document.getElementById("lti-resource");
+
+    function submitForm() {
+        selectResourceButton.classList.add("button--loading");
+        ltiResourceFrame.classList.add("invisible");
+        outerForm.submit();
+    }
+
+    ltiResourceFrame.addEventListener("load", function() {
+        selectResourceButton.classList.remove("button--loading");
+        ltiResourceFrame.classList.remove("invisible");
+    });
 </script>
 </body>
 

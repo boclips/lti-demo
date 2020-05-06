@@ -6,11 +6,13 @@
 </head>
 
 <body>
-    <form method="post" th:action="${redirectUri}">
+    <form id="inner-form" method="post" th:action="${redirectUri}">
         <input type="text" name="state" th:value="${state}"/>
         <input type="text" name="id_token" th:value="${idToken}"/>
-        <input type="submit">
     </form>
+    <script>
+        document.getElementById("inner-form").submit()
+    </script>
 </body>
 
 </html>

@@ -8,13 +8,17 @@ import org.springframework.web.servlet.ModelAndView
 @Controller
 class IndexPageController(
     @Value("\${boclips.lti.initiateLoginUrl}") private val initiateLoginUrl: String,
-    @Value("\${boclips.authentication.endPoint}") private val authEndpoint: String
+    @Value("\${boclips.authentication.endPoint}") private val authEndpoint: String,
+    @Value("\${boclips.lti.issuerUrl}") private val issuerUrl: String,
+    @Value("\${boclips.lti.targetLinkUri}") private val targetLinkUri: String
 ) {
     @GetMapping("/")
     fun landingPage() = ModelAndView(
         "index", mapOf(
             "initiateLoginUrl" to initiateLoginUrl,
-            "authEndpoint" to authEndpoint
+            "authEndpoint" to authEndpoint,
+            "issuerUrl" to issuerUrl,
+            "targetLinkUri" to targetLinkUri
         )
     )
 }

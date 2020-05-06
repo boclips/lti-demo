@@ -3,13 +3,20 @@
     font-family: 'Heebo', sans-serif;
 }
 
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .boclips-header {
     z-index: 1000;
-    width: 100vw;
     min-height: 84px;
+    flex:none;
     display: flex;
     align-items: center;
-    margin: -8px 0px 16px -8px;
+    margin: -8px 0px 0px -8px;
 
     background-color: #fff;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .2), 0 3px 6px 0 rgba(0, 0, 0, .16);
@@ -64,3 +71,53 @@
     box-shadow: 0 0 4px 1px #0E69FF;
 }
 
+.collapsed {
+    display:none;
+}
+
+.invisible {
+    visibility:hidden;
+}
+
+.flex-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.grow {
+    flex-grow: 1;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.button--loading {
+    background: #0E69FF !important;
+    animation-name: pulse;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+#resource-selection {
+    background: black;
+    padding: 8px 0;
+    flex:none;
+}
+
+#resource-selection-options {
+    margin:0 auto;
+    width: fit-content;
+}
+
+@keyframes pulse {
+    0% { background: #0E69FF; }
+    50% { background: #4ff492; }
+    100 { background: #0E69FF; }
+}
+
+.search-bar {
+    width: 400px
+}
