@@ -118,6 +118,7 @@ body, html {
     100 { background: #0E69FF; }
 }
 
-.search-bar {
-    width: 400px
+.resource-select {
+    width: 400px;
+    font-family: monospace;
 }

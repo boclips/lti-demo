@@ -22,7 +22,10 @@
     </header>
     <div id="resource-selection">
         <div id="resource-selection-options">
-            <input class="search-bar" value="/collections" disabled></input>
+            <select class="resource-select" id="resource-select">
+                <option value="/collections">/collections</option>
+                <option value="/search">/search</option>
+            </select>
             <button id="select-resource-button" class="button--primary" onclick=submitForm()>
                 <span>Get Resource</span>
             </button>
@@ -44,11 +47,11 @@
         </label>
         <label>
             target_link_uri
-            <input type="text" name="target_link_uri" th:value="${targetLinkUri}">
+            <input id="target_link_uri_input" type="text" name="target_link_uri" value="">
         </label>
         <label>
             lti_message_hint
-            <input type="text" name="lti_message_hint" th:value="${targetLinkUri}">
+            <input id="lti_message_hint_input" type="text" name="lti_message_hint" value="">
         </label>
     </form>
 
@@ -80,9 +83,25 @@
     Boclips.default.createInstance(authOptions);
 </script>
 <script>
+    const baseUrl = '[[${ltiBaseUrl}]]'
     const outerForm = document.getElementById("outer-form");
     const selectResourceButton = document.getElementById("select-resource-button");
     const ltiResourceFrame = document.getElementById("lti-resource");
+
+    const resourceSelect = document.getElementById("resource-select");
+    const targetLinkUriInput = document.getElementById("target_link_uri_input")
+    const ltiMessageHintInput = document.getElementById("lti_message_hint_input")
+
+    function updateLtiResourceToLaunch() {
+        targetLinkUriInput.value = baseUrl + resourceSelect.value
+        ltiMessageHintInput.value = baseUrl + resourceSelect.value
+    }
+
+    updateLtiResourceToLaunch()
+
+    resourceSelect.addEventListener("change", function() {
+        updateLtiResourceToLaunch()
+    });
 
     function submitForm() {
         selectResourceButton.classList.add("button--loading");

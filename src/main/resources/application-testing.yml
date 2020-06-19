@@ -2,7 +2,7 @@ boclips:
   lti:
     initiateLoginUrl: 'https://lti.testing-boclips.com/v1p3/initiate-login'
     issuerUrl: "https://lti-demo.testing-boclips.com"
-    targetLinkUri: "https://lti.testing-boclips.com/collections"
+    baseUrl: "https://lti.testing-boclips.com"
     privateSigningKey:
     publicSigningKey:
   authentication:

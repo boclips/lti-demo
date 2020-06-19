@@ -2,7 +2,7 @@ boclips:
   lti:
     initiateLoginUrl: "http://localhost:8081/v1p3/initiate-login"
     issuerUrl: "https://localhost:8080"
-    targetLinkUri: "http://localhost:8081/collections"
+    baseUrl: "http://localhost:8081"
     privateSigningKey: >-
       -----BEGIN PRIVATE KEY-----
       MIIJQQIBADANBgkqhkiG9w0BAQEFAASCCSswggknAgEAAoICAQDqYXEtuKhksIM0
