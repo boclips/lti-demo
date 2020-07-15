@@ -25,7 +25,9 @@
             <select class="resource-select" id="resource-select">
                 <option value="/collections">/collections</option>
                 <option value="/search">/search</option>
+                <option value="/embeddable-videos">/embeddable-videos</option>
             </select>
+            <input id="embed-video-option" type="text"/>
             <button id="select-resource-button" class="button--primary" onclick=submitForm()>
                 <span>Get Resource</span>
             </button>
@@ -74,7 +76,7 @@
             const container = document.getElementById("logout-container");
             const button = document.createElement("button");
             button.innerText = "Logout"
-            button.className="button button--primary"
+            button.className = "button button--primary"
             button.onclick = (() => Boclips.default.getInstance().logout());
             container.appendChild(button);
         },
@@ -93,23 +95,35 @@
     const ltiMessageHintInput = document.getElementById("lti_message_hint_input")
 
     function updateLtiResourceToLaunch() {
-        targetLinkUriInput.value = baseUrl + resourceSelect.value
-        ltiMessageHintInput.value = baseUrl + resourceSelect.value
+        const extraParams = resourceSelect.value === '/embeddable-videos' ? "/" + document.getElementById("embed-video-option").value : "";
+        targetLinkUriInput.value = baseUrl + resourceSelect.value + extraParams;
+        ltiMessageHintInput.value = baseUrl + resourceSelect.value + extraParams;
     }
 
     updateLtiResourceToLaunch()
 
-    resourceSelect.addEventListener("change", function() {
-        updateLtiResourceToLaunch()
+    const showExtraInput = (shouldShow) => {
+        const hiddenInput = document.getElementById("embed-video-option");
+        hiddenInput.style.display = shouldShow ? "inherit" : "none";
+    };
+
+    resourceSelect.addEventListener("change", function () {
+        if (resourceSelect.value === '/embeddable-videos') {
+            showExtraInput(true)
+        } else {
+            showExtraInput(false)
+        }
     });
 
     function submitForm() {
+        updateLtiResourceToLaunch()
+
         selectResourceButton.classList.add("button--loading");
         ltiResourceFrame.classList.add("invisible");
         outerForm.submit();
     }
 
-    ltiResourceFrame.addEventListener("load", function() {
+    ltiResourceFrame.addEventListener("load", function () {
         selectResourceButton.classList.remove("button--loading");
         ltiResourceFrame.classList.remove("invisible");
     });

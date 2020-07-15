@@ -110,6 +110,11 @@ body, html {
 #resource-selection-options {
     margin:0 auto;
     width: fit-content;
+    display: flex;
+}
+
+#resource-selection-options * {
+    margin: 0px 4px;
 }
 
 @keyframes pulse {
@@ -121,4 +126,9 @@ body, html {
 .resource-select {
     width: 400px;
     font-family: monospace;
+}
+
+#embed-video-option{
+    display:none;
+    width: 225px;
 }
