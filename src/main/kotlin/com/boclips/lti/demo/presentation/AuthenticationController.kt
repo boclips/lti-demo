@@ -38,18 +38,26 @@ class AuthenticationController(
         @NotNull
         @RequestParam prompt: String,
         @NotNull
-        @RequestParam lti_message_hint: String,
-        @RequestParam message_type: String?,
-        @RequestParam data: String?,
-        @RequestParam deep_linking_resource_url: String?
+        @RequestParam lti_message_hint: String
     ): ModelAndView {
-        val token = assembleIdToken(
-            clientId = client_id,
-            issuer = URL(issuerUrl),
-            targetLinkUri = URL(lti_message_hint),
-            messageType = message_type,
-            deepLinkReturnUrl = deep_linking_resource_url
-        )
+        val token = if (lti_message_hint.contains("search-and-embed")) {
+            assembleIdToken(
+                clientId = client_id,
+                issuer = URL(issuerUrl),
+                targetLinkUri = URL(lti_message_hint),
+                messageType = "deep_linking",
+                deepLinkReturnUrl = "$issuerUrl/search-and-embed-deep-link"
+            )
+        } else {
+            assembleIdToken(
+                clientId = client_id,
+                issuer = URL(issuerUrl),
+                targetLinkUri = URL(lti_message_hint),
+                messageType = null,
+                deepLinkReturnUrl = null
+            )
+        }
+
         return ModelAndView(
             "auth-success",
             mapOf("state" to state, "idToken" to token, "redirectUri" to redirect_uri)

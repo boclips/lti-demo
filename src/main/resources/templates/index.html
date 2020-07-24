@@ -100,10 +100,6 @@
             return `/${document.getElementById("embed-video-option").value}`;
         }
 
-        if (resourceSelect.value === "/search-and-embed") {
-            return `?deployment_id=boclips&data=hello&message_type=deep_linking&deep_linking_resource_url=${window.location.href}`;
-        }
-
         return "";
     }
 
