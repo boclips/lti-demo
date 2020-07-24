@@ -25,6 +25,7 @@
             <select class="resource-select" id="resource-select">
                 <option value="/collections">/collections</option>
                 <option value="/search">/search</option>
+                <option value="/search-and-embed">/search-and-embed</option>
                 <option value="/embeddable-videos">/embeddable-videos</option>
             </select>
             <input id="embed-video-option" type="text"/>
@@ -59,8 +60,8 @@
 
     <iframe id="lti-resource"
             name="lti-resource"
-            class="invisible grow"
-    >
+            class="invisible grow">
+
     </iframe>
 </div>
 
@@ -94,8 +95,21 @@
     const targetLinkUriInput = document.getElementById("target_link_uri_input")
     const ltiMessageHintInput = document.getElementById("lti_message_hint_input")
 
+    function getExtraParams() {
+        if (resourceSelect.value === '/embeddable-videos') {
+            return `/${document.getElementById("embed-video-option").value}`;
+        }
+
+        if (resourceSelect.value === "/search-and-embed") {
+            return `?deployment_id=boclips&data=hello&message_type=deep_linking&deep_linking_resource_url=${window.location.href}`;
+        }
+
+        return "";
+    }
+
     function updateLtiResourceToLaunch() {
-        const extraParams = resourceSelect.value === '/embeddable-videos' ? "/" + document.getElementById("embed-video-option").value : "";
+        const extraParams = getExtraParams();
+
         targetLinkUriInput.value = baseUrl + resourceSelect.value + extraParams;
         ltiMessageHintInput.value = baseUrl + resourceSelect.value + extraParams;
     }

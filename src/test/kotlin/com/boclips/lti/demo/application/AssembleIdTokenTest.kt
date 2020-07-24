@@ -19,7 +19,7 @@ class AssembleIdTokenTest : AbstractSpringIntegrationTest() {
         val clientId = "my-client"
         val issuer = URL("http://cool.spot")
         val targetLinkUri = URL("http://my-cool-uri.bike")
-        val encoded = assembleIdToken(clientId, issuer, targetLinkUri)
+        val encoded = assembleIdToken(clientId, issuer, targetLinkUri, messageType = null, deepLinkReturnUrl = null)
         val decoded = JWT.decode(encoded)
         assertThat(decoded.issuer).isEqualTo(issuer.toString())
         assertThat(decoded.audience).containsExactly(clientId)
@@ -42,5 +42,46 @@ class AssembleIdTokenTest : AbstractSpringIntegrationTest() {
         assertThat(
             decoded.getClaim(LtiCustomClaimKey.RESOURCE_LINK.value).asMap()["id"] as String
         ).isNotBlank()
+    }
+
+    @Test
+    fun `correct message type if specified`() {
+        val clientId = "my-client"
+        val issuer = URL("http://cool.spot")
+        val targetLinkUri = URL("http://my-cool-uri.bike")
+        val encoded =
+            assembleIdToken(clientId, issuer, targetLinkUri, messageType = "deep_linking", deepLinkReturnUrl = null)
+        val decoded = JWT.decode(encoded)
+        assertThat(
+            decoded.getClaim(LtiCustomClaimKey.TARGET_LINK_URI.value).asString()
+        ).isEqualTo(targetLinkUri.toString())
+        assertThat(
+            decoded.getClaim(LtiCustomClaimKey.MESSAGE_TYPE.value).asString()
+        ).isEqualTo(LtiMessageType.DEEP_LINKING_REQUEST.value)
+    }
+
+    @Test
+    fun `sets deep linking claims if specified`() {
+        val clientId = "my-client"
+        val issuer = URL("http://cool.spot")
+        val targetLinkUri = URL("http://my-cool-uri.bike")
+        val encoded = assembleIdToken(
+            clientId,
+            issuer,
+            targetLinkUri,
+            messageType = "deep_linking",
+            deepLinkReturnUrl = "http://my-cool-uri.deep-link"
+        )
+        val decoded = JWT.decode(encoded)
+
+        assertThat(
+            decoded.getClaim(LtiCustomClaimKey.MESSAGE_TYPE.value).asString()
+        ).isEqualTo(LtiMessageType.DEEP_LINKING_REQUEST.value)
+
+        assertThat(decoded.getClaim(LtiMessageType.DEEP_LINKING_REQUEST.value)).isNotNull
+        val deepLinkingSettings = decoded.getClaim(LtiCustomClaimKey.DEEP_LINKING_SETTINGS.value).asMap()
+        assertThat(deepLinkingSettings["deep_link_return_url"]).isEqualTo("http://my-cool-uri.deep-link")
+        assertThat(deepLinkingSettings["accept_types"]).isEqualTo(listOf("ltiResourceLink"))
+        assertThat(deepLinkingSettings["accept_presentation_document_targets"]).isEqualTo(listOf("iframe"))
     }
 }

@@ -38,12 +38,17 @@ class AuthenticationController(
         @NotNull
         @RequestParam prompt: String,
         @NotNull
-        @RequestParam lti_message_hint: String
+        @RequestParam lti_message_hint: String,
+        @RequestParam message_type: String?,
+        @RequestParam data: String?,
+        @RequestParam deep_linking_resource_url: String?
     ): ModelAndView {
         val token = assembleIdToken(
             clientId = client_id,
             issuer = URL(issuerUrl),
-            targetLinkUri = URL(lti_message_hint)
+            targetLinkUri = URL(lti_message_hint),
+            messageType = message_type,
+            deepLinkReturnUrl = deep_linking_resource_url
         )
         return ModelAndView(
             "auth-success",
