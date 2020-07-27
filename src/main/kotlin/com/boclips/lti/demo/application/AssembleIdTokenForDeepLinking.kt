@@ -1,21 +1,28 @@
 package com.boclips.lti.demo.application
 
 import com.auth0.jwt.JWT
+import com.auth0.jwt.JWTCreator
 import com.auth0.jwt.algorithms.Algorithm
 import com.boclips.lti.demo.domain.LtiCustomClaimKey
 import com.boclips.lti.demo.domain.LtiMessageType
+import com.boclips.lti.demo.domain.LtiVersion
 import java.net.URL
+import java.time.Instant
+import java.time.temporal.ChronoUnit
+import java.util.Date
+import java.util.UUID
 
-class AssembleIdToken(
+class AssembleIdTokenForDeepLinking(
     private val getSigningKeys: GetSigningKeys
 ) {
     operator fun invoke(
         clientId: String,
         issuer: URL,
-        targetLinkUri: URL
+        targetLinkUri: URL,
+        deepLinkReturnUrl: String
     ): String =
         JWT.create()
-            .withDefaultLti1p3Claims(issuer = issuer, clientId = clientId, targetLinkUri = targetLinkUri)
-            .withClaim(LtiCustomClaimKey.MESSAGE_TYPE.value, LtiMessageType.RESOURCE_LINK_REQUEST.value)
+            .withDefaultLti1p3Claims(issuer, clientId, targetLinkUri)
+            .withDeepLinkingClaims(deepLinkReturnUrl)
             .sign(Algorithm.RSA256(getSigningKeys.keyPair.public, getSigningKeys.keyPair.private))
 }

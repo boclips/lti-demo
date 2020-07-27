@@ -1,6 +1,7 @@
 package com.boclips.lti.demo.presentation
 
 import com.boclips.lti.demo.application.AssembleIdToken
+import com.boclips.lti.demo.application.AssembleIdTokenForDeepLinking
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull
 @RequestMapping("/auth")
 class AuthenticationController(
     val assembleIdToken: AssembleIdToken,
+    val assembleIdTokenForDeepLinking: AssembleIdTokenForDeepLinking,
     @Value("\${boclips.lti.issuerUrl}") private val issuerUrl: String
 ) {
 
@@ -41,20 +43,17 @@ class AuthenticationController(
         @RequestParam lti_message_hint: String
     ): ModelAndView {
         val token = if (lti_message_hint.contains("search-and-embed")) {
-            assembleIdToken(
+            assembleIdTokenForDeepLinking(
                 clientId = client_id,
                 issuer = URL(issuerUrl),
                 targetLinkUri = URL(lti_message_hint),
-                messageType = "deep_linking",
-                deepLinkReturnUrl = "$issuerUrl/search-and-embed-deep-link"
+                deepLinkReturnUrl = "$issuerUrl/videos-deep-link"
             )
         } else {
             assembleIdToken(
                 clientId = client_id,
                 issuer = URL(issuerUrl),
-                targetLinkUri = URL(lti_message_hint),
-                messageType = null,
-                deepLinkReturnUrl = null
+                targetLinkUri = URL(lti_message_hint)
             )
         }
 

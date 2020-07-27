@@ -1,11 +1,11 @@
 server:
-  port: 3000
+  port: 8080
 
 boclips:
   lti:
-    initiateLoginUrl: "http://localhost:8080/v1p3/initiate-login"
-    issuerUrl: "https://lti-demo.staging-boclips.com"
-    baseUrl: "http://localhost:8080"
+    initiateLoginUrl: "http://localhost:8081/v1p3/initiate-login"
+    issuerUrl: "http://localhost:8080"
+    baseUrl: "http://localhost:8081"
     privateSigningKey: >-
       -----BEGIN PRIVATE KEY-----
       MIIJQQIBADANBgkqhkiG9w0BAQEFAASCCSswggknAgEAAoICAQDqYXEtuKhksIM0
