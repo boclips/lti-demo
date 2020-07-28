@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<h1 data-qa="deep-links-header">Selected Videos</h1>
 <div th:each="selectedVideo: ${selectedVideos}">
     <iframe th:src="${selectedVideo}"></iframe>
 </div>
