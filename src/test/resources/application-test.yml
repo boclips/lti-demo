@@ -5,6 +5,7 @@ boclips:
     initiateLoginUrl: "https://lti.staging-boclips.com/v1p3/initiate-login"
     issuerUrl: "https://test-issuser.com"
     baseUrl: "https://lti"
+    jwksUrl: "https://lti/.well-known/jwks"
     privateSigningKey: >-
       -----BEGIN PRIVATE KEY-----
       MIIJQQIBADANBgkqhkiG9w0BAQEFAASCCSswggknAgEAAoICAQDqYXEtuKhksIM0

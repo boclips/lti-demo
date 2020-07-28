@@ -6,6 +6,7 @@ boclips:
     initiateLoginUrl: "http://localhost:8081/v1p3/initiate-login"
     issuerUrl: "http://localhost:8080"
     baseUrl: "http://localhost:8081"
+    jwksUrl: "http://localhost:8081/.well-known/jwks"
     privateSigningKey: >-
       -----BEGIN PRIVATE KEY-----
       MIIJQQIBADANBgkqhkiG9w0BAQEFAASCCSswggknAgEAAoICAQDqYXEtuKhksIM0

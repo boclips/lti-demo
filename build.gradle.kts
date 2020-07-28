@@ -36,9 +36,13 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 
 	implementation("com.auth0:java-jwt:3.10.2")
+	implementation("com.auth0:jwks-rsa:0.11.0")
 	implementation("org.bitbucket.b_c:jose4j:0.7.0")
 	implementation("io.sentry:sentry-logback:1.7.21")
 
+	testImplementation("com.github.tomakehurst:wiremock-jre8:2.25.1")
+	testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0")
+	testImplementation("ru.lanwen.wiremock:wiremock-junit5:1.3.1")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}

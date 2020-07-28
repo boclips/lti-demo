@@ -3,6 +3,7 @@ boclips:
     initiateLoginUrl: 'https://lti.boclips.com/v1p3/initiate-login'
     issuerUrl: "https://lti-demo.boclips.com"
     baseUrl: "https://lti.boclips.com"
+    jwksUrl: "https://lti.boclips.com/.well-known/jwks"
     privateSigningKey:
     publicSigningKey:
   authentication:
