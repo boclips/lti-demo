@@ -4,7 +4,7 @@
 <head>
     <title>LTI Demo</title>
     <script type="application/javascript"
-            src="https://unpkg.com/boclips-js-security@3.4.3/dist/min/boclips-js-security">
+            src="https://unpkg.com/boclips-js-security@4.0.0/dist/min/boclips-js-security">
     </script>
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
@@ -69,7 +69,7 @@
     const authOptions = {
         realm: 'boclips',
         clientId: 'backoffice-ui',
-        mode: 'login-required',
+        requireLoginPage: true,
         authEndpoint: /*[[${authEndpoint}]]*/ "",
         onLogin: () => {
             console.log("%cLTI DEMO", "color: white; background-color: #0e69ff; font-size: 25px; border-radius: 8px; padding-right: 10px; padding-left: 10px;");
