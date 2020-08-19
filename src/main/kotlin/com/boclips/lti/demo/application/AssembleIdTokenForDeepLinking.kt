@@ -19,10 +19,11 @@ class AssembleIdTokenForDeepLinking(
         clientId: String,
         issuer: URL,
         targetLinkUri: URL,
-        deepLinkReturnUrl: String
+        deepLinkReturnUrl: String,
+        subject: String
     ): String =
         JWT.create()
-            .withDefaultLti1p3Claims(issuer, clientId, targetLinkUri)
+            .withDefaultLti1p3Claims(issuer, clientId, targetLinkUri, subject)
             .withDeepLinkingClaims(deepLinkReturnUrl)
             .sign(Algorithm.RSA256(getSigningKeys.keyPair.public, getSigningKeys.keyPair.private))
 }

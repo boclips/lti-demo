@@ -12,10 +12,11 @@ class AssembleIdToken(
     operator fun invoke(
         clientId: String,
         issuer: URL,
-        targetLinkUri: URL
+        targetLinkUri: URL,
+        subject: String
     ): String =
         JWT.create()
-            .withDefaultLti1p3Claims(issuer = issuer, clientId = clientId, targetLinkUri = targetLinkUri)
+            .withDefaultLti1p3Claims(issuer = issuer, clientId = clientId, targetLinkUri = targetLinkUri, subject = subject)
             .withClaim(LtiCustomClaimKey.MESSAGE_TYPE.value, LtiMessageType.RESOURCE_LINK_REQUEST.value)
             .sign(Algorithm.RSA256(getSigningKeys.keyPair.public, getSigningKeys.keyPair.private))
 }
