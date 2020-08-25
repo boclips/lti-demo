@@ -32,6 +32,8 @@ class AssembleIdTokenForDeepLinkingIntegrationTest : AbstractSpringIntegrationTe
 
         assertThat(decoded.getClaim(LtiMessageType.DEEP_LINKING_REQUEST.value)).isNotNull
 
+        assertThat(decoded.subject).isNotBlank()
+
         val deepLinkingSettings = decoded.getClaim(LtiCustomClaimKey.DEEP_LINKING_SETTINGS.value).asMap()
         assertThat(deepLinkingSettings["deep_link_return_url"]).isEqualTo("http://my-cool-uri.deep-link")
         assertThat(deepLinkingSettings["accept_types"]).isEqualTo(listOf("ltiResourceLink"))

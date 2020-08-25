@@ -30,6 +30,7 @@ fun JWTCreator.Builder.withDefaultLti1p3Claims(
     return this
         .withIssuer(issuer.toString())
         .withAudience(clientId)
+        .withSubject(UUID.randomUUID().toString())
         .withClaim("azp", clientId)
         .withIssuedAt(Date.from(Instant.now()))
         .withExpiresAt(Date.from(Instant.now().plus(5, ChronoUnit.MINUTES)))

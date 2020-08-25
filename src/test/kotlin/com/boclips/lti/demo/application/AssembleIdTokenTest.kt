@@ -23,6 +23,7 @@ class AssembleIdTokenTest : AbstractSpringIntegrationTest() {
         val decoded = JWT.decode(encoded)
         assertThat(decoded.issuer).isEqualTo(issuer.toString())
         assertThat(decoded.audience).containsExactly(clientId)
+        assertThat(decoded.subject).isNotBlank()
         assertThat(decoded.getClaim("azp").asString()).isEqualTo(clientId)
         assertThat(decoded.issuedAt).isNotNull()
         assertThat(decoded.expiresAt).isNotNull()
