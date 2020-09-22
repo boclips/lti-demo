@@ -5,7 +5,7 @@ import com.boclips.lti.demo.domain.DeepLinkingResult
 import com.boclips.lti.demo.domain.DeepLinkingSelectedContent
 import com.boclips.lti.demo.testsupport.AbstractSpringIntegrationTest
 import com.nhaarman.mockitokotlin2.whenever
-import org.hamcrest.Matchers.contains
+import org.hamcrest.Matchers.containsInAnyOrder
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
@@ -24,8 +24,10 @@ class VideosDeepLinkControllerIntegrationTest : AbstractSpringIntegrationTest() 
             DeepLinkingResult(
                 data = "blah", selectedContents = listOf(
                     DeepLinkingSelectedContent(
-                        type = "any",
-                        url = "https://great-content-over-here.com"
+                            type = "any",
+                            url = "https://great-content-over-here.com",
+                            title = "a awesome title",
+                            text = "a wonderful description"
                     )
                 )
             )
@@ -35,11 +37,16 @@ class VideosDeepLinkControllerIntegrationTest : AbstractSpringIntegrationTest() 
             post("/videos-deep-link")
                 .param("JWT", token)
         )
-            .andExpect(view().name("videos-deep-link"))
-            .andExpect(
+                .andExpect(view().name("videos-deep-link"))
+                .andExpect(
                 model().attribute(
                     "selectedVideos",
-                    contains("https://great-content-over-here.com")
+                    containsInAnyOrder(DeepLinkingSelectedContent(
+                            url = "https://great-content-over-here.com",
+                            title = "a awesome title",
+                            text = "a wonderful description",
+                            type = "any"
+                    ))
                 )
             )
     }

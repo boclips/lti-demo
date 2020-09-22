@@ -18,7 +18,8 @@ class VideosDeepLinkController(
 
         return ModelAndView(
             "videos-deep-link",
-            mapOf("selectedVideos" to decodedResult.selectedContents.map { it.url })
+            mapOf("selectedVideos" to decodedResult.selectedContents)
         )
     }
 }
+

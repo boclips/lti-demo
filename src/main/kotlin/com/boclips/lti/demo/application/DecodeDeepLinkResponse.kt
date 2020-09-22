@@ -32,7 +32,9 @@ class DecodeDeepLinkResponse(
                 ?.map { item ->
                     DeepLinkingSelectedContent(
                         type = item["type"] as String,
-                        url = item["url"] as String
+                        url = item["url"] as String,
+                        title = item["title"] as String,
+                        text = item["text"] as String
                     )
                 }
         val data = decodedToken.claims["https://purl.imsglobal.org/spec/lti-dl/claim/data"]?.asString()
