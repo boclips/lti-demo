@@ -30,12 +30,12 @@ fun JWTCreator.Builder.withDefaultLti1p3Claims(
     return this
         .withIssuer(issuer.toString())
         .withAudience(clientId)
-        .withSubject(UUID.randomUUID().toString())
+        .withSubject("lti-demo-external-user-id")
         .withClaim("azp", clientId)
         .withIssuedAt(Date.from(Instant.now()))
         .withExpiresAt(Date.from(Instant.now().plus(5, ChronoUnit.MINUTES)))
         .withClaim("nonce", UUID.randomUUID().toString())
-        .withClaim(LtiCustomClaimKey.DEPLOYMENT_ID.value, UUID.randomUUID().toString())
+        .withClaim(LtiCustomClaimKey.DEPLOYMENT_ID.value, "lti-demo-deployment-id")
         .withClaim(LtiCustomClaimKey.TARGET_LINK_URI.value, targetLinkUri.toString())
         .withClaim(LtiCustomClaimKey.VERSION.value, LtiVersion.ONE_POINT_THREE.value)
         .withClaim(
