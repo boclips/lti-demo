@@ -22,6 +22,22 @@ fun JWTCreator.Builder.withDeepLinkingClaims(deepLinkReturnUrl: String): JWTCrea
         )
 }
 
+val demoUserIds = listOf(
+    "lti-demo-external-user-id",
+    "lti-demo-external-user-id-2",
+    "lti-demo-external-user-id-3",
+    "lti-demo-external-user-id-4",
+    "lti-demo-external-user-id-5"
+)
+
+val demoDeploymentIds = listOf(
+    "lti-demo-deployment-id",
+    "lti-demo-deployment-id-2",
+    "lti-demo-deployment-id-3",
+    "lti-demo-deployment-id-4",
+    "lti-demo-deployment-id-5"
+)
+
 fun JWTCreator.Builder.withDefaultLti1p3Claims(
     issuer: URL,
     clientId: String,
@@ -30,12 +46,12 @@ fun JWTCreator.Builder.withDefaultLti1p3Claims(
     return this
         .withIssuer(issuer.toString())
         .withAudience(clientId)
-        .withSubject("lti-demo-external-user-id")
+        .withSubject(demoUserIds.random())
         .withClaim("azp", clientId)
         .withIssuedAt(Date.from(Instant.now()))
         .withExpiresAt(Date.from(Instant.now().plus(5, ChronoUnit.MINUTES)))
         .withClaim("nonce", UUID.randomUUID().toString())
-        .withClaim(LtiCustomClaimKey.DEPLOYMENT_ID.value, "lti-demo-deployment-id")
+        .withClaim(LtiCustomClaimKey.DEPLOYMENT_ID.value, demoDeploymentIds.random())
         .withClaim(LtiCustomClaimKey.TARGET_LINK_URI.value, targetLinkUri.toString())
         .withClaim(LtiCustomClaimKey.VERSION.value, LtiVersion.ONE_POINT_THREE.value)
         .withClaim(

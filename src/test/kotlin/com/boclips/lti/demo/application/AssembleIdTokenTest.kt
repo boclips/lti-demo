@@ -44,4 +44,9 @@ class AssembleIdTokenTest : AbstractSpringIntegrationTest() {
             decoded.getClaim(LtiCustomClaimKey.RESOURCE_LINK.value).asMap()["id"] as String
         ).isNotBlank()
     }
+
+    @Test
+    fun `random returns a value from the list`() {
+        assertThat(demoUserIds).contains(demoUserIds.random())
+    }
 }
